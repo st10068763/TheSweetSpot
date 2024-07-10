@@ -14,7 +14,7 @@ namespace TheSweetSpot
     public partial class RegisterPage : System.Web.UI.Page
     {
         //Connection string 
-        string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:|DataDirectory|\\TheSweetSpotDB.mdf;Integrated Security=True";
+        string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\TheSweetSpotDB.mdf;Integrated Security=True";
         /// <summary>
         /// 
         /// </summary>
@@ -33,13 +33,13 @@ namespace TheSweetSpot
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     string query = @"
-                        INSERT INTO Users (Username, Password, Email, PhoneNumber) 
-                        VALUES (@Username, @Password, @Email, @PhoneNumber)";
+                        INSERT INTO Users (Username, PasswordHash, Email, PhoneNumber) 
+                        VALUES (@Username, @PasswordHash, @Email, @PhoneNumber)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Username", username);
-                        command.Parameters.AddWithValue("@Password", password);
+                        command.Parameters.AddWithValue("@PasswordHash", password);
                         command.Parameters.AddWithValue("@Email", email);
                         command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
 
@@ -103,6 +103,16 @@ namespace TheSweetSpot
             string email = txtEmail.Text;
             string phoneNumber = txtPhoneNumber.Text;
             string password = txtPassword.Text;
+            string password2 = txtConfirmPassword.Text;
+
+            //// verifying if the two password match
+            //if (password != password2)
+            //{
+            //    lblMessage.Text = "Passwords don't match " +
+            //                          "Try again!";
+            //    lblMessage.CssClass = "text-danger";
+            //    return;
+            //}
 
             // This will hash the password before storing it in the database
             string hashedPassword = DataEncryptionClass.HashPassword(password);

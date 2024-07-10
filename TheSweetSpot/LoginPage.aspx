@@ -8,8 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-           <!-- Custom CSS -->
-      <link rel="stylesheet" href="~/MyCSS/MyStyleFencySheet.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/MyCSS/MyStyleFencySheet.css" />
     <style>
         /* Custom styles can be added here */
         body {
@@ -41,24 +41,27 @@
         <div class="container mt-5">
             <div class="login-form">
                 <h2 class="text-center">Log in</h2>
+                <!-- Error message -->
+                <div>
+                   <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+                </div>
                 <div class="mb-3">
-                    <label for="txtUsername" class="form-label">Username</label>
-                    <input type="text" id="txtUsername" runat="server" class="form-control" placeholder="Enter your username" />
+                    <label for="txtEmail" class="form-label">Email</label>
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Enter your email"></asp:TextBox>
                 </div>
                 <div class="mb-3">
                     <label for="txtPassword" class="form-label">Password</label>
-                    <input type="password" id="txtPassword" runat="server" class="form-control" placeholder="Enter your password" />
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" placeholder="Enter your password"></asp:TextBox>
                 </div>
                 <div class="d-grid gap-2">
                     <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
                 </div>
                 <div class="text-center mt-3">
-                    <a href="#">Forgot password?</a>
+                    <a href="ResetPassword.aspx">Forgot password?</a>
                 </div>
-
                 <div class="text-center mt-3">
                     <a href="RegisterPage.aspx">Don't have an account? Register here</a>
-                    </div>
+                </div>
             </div>
         </div>
 

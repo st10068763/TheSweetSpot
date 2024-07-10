@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <!-- Custom CSS -->
-    <link href="~/Styles/HomePageStyles.css" rel="stylesheet" />
+       <!-- Custom CSS -->
+   <link rel="stylesheet" href="~/MyCSS/MyStyleFencySheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -31,10 +31,10 @@
                             <a class="nav-link" href="About.aspx">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Contact.aspx">Contact</a>
+                            <a class="nav-link" href="ContactPage.aspx">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Login.aspx">Logout</a>
+                            <a class="nav-link" href="LoginPage.aspx">Logout</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="CakeGallery.aspx">Cakes</a>
@@ -60,7 +60,7 @@
             <div class="container">
                 <h1 id="heroTitle">Welcome to The Sweet Spot</h1>
                 <p class="lead">Your destination for the most delicious and beautifully crafted cakes!</p>
-                <p><a href="#featuredCakes" class="btn btn-primary btn-lg">Explore Our Cakes &raquo;</a></p>
+                <p><a href="CakeGallery.aspx" class="btn btn-primary btn-lg">Explore Our Cakes &raquo;</a></p>
             </div>
         </section>
 
@@ -70,31 +70,32 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card cake-card">
-                            <img src="images/cake1.jpg" alt="Cake 1" class="card-img-top">
+                            <img src="https://cookingandcussing.com/wp-content/uploads/2019/06/IMG_7127-min.jpg.webp" alt="Cake 1" class="card-img-top"/>
+                           
                             <div class="card-body">
                                 <h3 class="card-title">Chocolate Delight</h3>
                                 <p class="card-text">$30 - Rich chocolate cake with creamy ganache.</p>
-                                <a href="Order.aspx?cakeId=1" class="btn btn-primary">Order Now</a>
+                                <a href="CartPage.aspx?cakeId=1" class="btn btn-primary">Order Now</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card cake-card">
-                            <img src="images/cake2.jpg" alt="Cake 2" class="card-img-top">
+                            <img src="https://www.hamperlicious.co.za/wp-content/uploads/2021/05/NETCG18.jpg" alt="Cake 2" class="card-img-top"/>
                             <div class="card-body">
                                 <h3 class="card-title">Vanilla Dream</h3>
                                 <p class="card-text">$25 - Light vanilla cake with buttercream frosting.</p>
-                                <a href="Order.aspx?cakeId=2" class="btn btn-primary">Order Now</a>
+                                <a href="CartPage.aspx?cakeId=2" class="btn btn-primary">Order Now</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card cake-card">
-                            <img src="images/cake3.jpg" alt="Cake 3" class="card-img-top">
+                            <img src="https://thescranline.com/wp-content/uploads/2023/06/RED-VELVET-CAKE-23-S-01.jpg" alt="Cake 3" class="card-img-top"/>
                             <div class="card-body">
                                 <h3 class="card-title">Red Velvet</h3>
                                 <p class="card-text">$35 - Classic red velvet cake with cream cheese frosting.</p>
-                                <a href="Order.aspx?cakeId=3" class="btn btn-primary">Order Now</a>
+                                <a href="CartPage.aspx?cakeId=3" class="btn btn-primary">Order Now</a>
                             </div>
                         </div>
                     </div>
