@@ -10,23 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/MyCSS/MyStyleFencySheet.css" />
-    <style>
-        /* Custom styles can be added here */
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .register-form {
-            max-width: 360px;
-            margin: auto;
-            padding: 15px;
-            background: #fff;
-            border: 1px solid #ced4da;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 100px;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -41,25 +24,29 @@
         <div class="container mt-5">
             <div class="register-form">
                 <h2 class="text-center">Register</h2>
+                <!-- error message -->
+                <div>
+                    <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+                </div>
                 <div class="mb-3">
                     <label for="txtUsername" class="form-label">Username</label>
-                    <input type="text" id="txtUsername" runat="server" class="form-control" placeholder="Enter your username" />
+                    <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" placeholder="Enter your username"></asp:TextBox>
                 </div>
                 <div class="mb-3">
                     <label for="txtEmail" class="form-label">Email</label>
-                    <input type="email" id="txtEmail" runat="server" class="form-control" placeholder="Enter your email" />
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Enter your email" TextMode="Email"></asp:TextBox>
                 </div>
-                 <div class="mb-3">
-                     <label for="phoneNumber" class="form-label">Phone Number</label>
-                     <input type="text" id="phoneNumber" runat="server" class="form-control" placeholder="Enter your phone number" />
-                 </div>
+                <div class="mb-3">
+                    <label for="txtPhoneNumber" class="form-label">Phone Number</label>
+                    <asp:TextBox ID="txtPhoneNumber" runat="server" CssClass="form-control" placeholder="Enter your phone number"></asp:TextBox>
+                </div>
                 <div class="mb-3">
                     <label for="txtPassword" class="form-label">Password</label>
-                    <input type="password" id="txtPassword" runat="server" class="form-control" placeholder="Enter your password" />
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Enter your password" TextMode="Password"></asp:TextBox>
                 </div>
                 <div class="mb-3">
                     <label for="txtConfirmPassword" class="form-label">Confirm Password</label>
-                    <input type="password" id="txtConfirmPassword" runat="server" class="form-control" placeholder="Confirm your password" />
+                    <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" placeholder="Confirm your password" TextMode="Password"></asp:TextBox>
                 </div>
                 <div class="d-grid gap-2">
                     <asp:Button ID="btnRegister" runat="server" Text="Register" CssClass="btn btn-primary" OnClick="btnRegister_Click" />

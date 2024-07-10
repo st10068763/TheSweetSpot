@@ -106,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="App_Data\TheSweetSpotDB.mdf" />
+    <Content Include="App_Data\TheSweetSpotDB_log.ldf">
+      <DependentUpon>TheSweetSpotDB.mdf</DependentUpon>
+    </Content>
     <Content Include="BlogAndPromosPage.aspx" />
     <Content Include="CakeGallery.aspx" />
     <Content Include="CartPage.aspx" />
@@ -247,6 +251,7 @@
     <Compile Include="ContactPage.aspx.designer.cs">
       <DependentUpon>ContactPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DataEncryptionClass.cs" />
     <Compile Include="FAQPage.aspx.cs">
       <DependentUpon>FAQPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -343,9 +348,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
