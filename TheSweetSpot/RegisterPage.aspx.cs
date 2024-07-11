@@ -15,6 +15,7 @@ namespace TheSweetSpot
     {
         //Connection string 
         string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\TheSweetSpotDB.mdf;Integrated Security=True";
+
         /// <summary>
         /// 
         /// </summary>
