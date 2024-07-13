@@ -1,7 +1,45 @@
 ﻿<%@ Page Title="About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="TheSweetSpot.About" %>
-
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <main class="container about-page" aria-labelledby="title">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="HomePage.aspx">The Sweet Spot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="HomePage.aspx">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CakeGallery.aspx">Cakes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ContactPage.aspx">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CartPage.aspx">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="UserAccountPage.aspx">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="LoginPage.aspx">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="FAQPage.aspx">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="OrderPage.aspx">Order</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container about-page mt-5" aria-labelledby="title">
         <div class="row">
             <div class="col-md-12 text-center">
                 <h1 id="title"><%: Title %></h1>
@@ -34,4 +72,15 @@
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white mt-5">
+        <div class="container text-center py-3">
+            <p>&copy; 2024 The Sweet Spot. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </asp:Content>

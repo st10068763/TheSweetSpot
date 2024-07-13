@@ -33,7 +33,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#">The Sweet Spot</a>
+                <a class="navbar-brand" href="HomePage.aspx">The Sweet Spot</a>
             </div>
         </nav>
 

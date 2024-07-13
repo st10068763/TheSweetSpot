@@ -80,7 +80,11 @@ namespace TheSweetSpot
             }
         }
 
-
+        /// <summary>
+        /// Button that will allow user t remove a cake
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnRemoveCake_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -97,7 +101,8 @@ namespace TheSweetSpot
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         successMessage.Text = "Cake removed successfully!";
-                        LoadCakes(); // Refresh the cake list
+                        // Refresh the cake list
+                        LoadCakes(); 
                     }
                     catch (Exception ex)
                     {

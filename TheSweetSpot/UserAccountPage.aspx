@@ -32,7 +32,7 @@
                             <a class="nav-link" href="ContactPage.aspx">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Login.aspx">Logout</a>
+                            <a class="nav-link" href="LoginPage.aspx">Logout</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="CakeGallery.aspx">Cakes</a>

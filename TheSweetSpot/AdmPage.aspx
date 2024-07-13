@@ -39,11 +39,37 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">The Sweet Spot</a>
-            </div>
-        </nav>
+         <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+          <a class="navbar-brand" href="HomePage.aspx">The Sweet Spot</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link" href="About.aspx">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="ContactPage.aspx">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="LoginPage.aspx">Logout</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="CakeGallery.aspx">Cakes</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="FAQPage.aspx">FAQ</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="CartPage.aspx">Cart</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
 
         <div class="container admin-container">
             <div class="admin-header text-center">

@@ -35,11 +35,8 @@
                             <a class="nav-link active" aria-current="page" href="ContactPage.aspx">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Login.aspx">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Register.aspx">Register</a>
-                        </li>
+                            <a class="nav-link" href="LoginPage.aspx">Logout</a>
+                        </li>                        
                     </ul>
                 </div>
             </div>

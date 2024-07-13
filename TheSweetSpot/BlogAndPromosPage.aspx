@@ -11,6 +11,32 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+         <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+     <div class="container">
+         <a class="navbar-brand" href="HomePage.aspx">The Sweet Spot</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="navbar-nav ms-auto">
+                 <li class="nav-item">
+                     <a class="nav-link" href="HomePage.aspx">Home</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="CakeGallery.aspx">Cakes</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="ContactPage.aspx">Contact</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="CartPage.aspx">Cart</a>
+                 </li>
+             </ul>
+         </div>
+     </div>
+ </nav>
         <div class="container mt-5">
             <h1 class="text-center mb-4">Blog and Promotions</h1>
             
@@ -44,14 +70,14 @@
                         <div class="card-body">
                             <h5 class="card-title">Summer Sale - 20% Off All Orders</h5>
                             <p class="card-text">Enjoy a sweet discount this summer! Get 20% off all cake orders until the end of July.</p>
-                            <a href="#" class="btn btn-primary">Shop Now</a>
+                            <a href="OrderPage.aspx" class="btn btn-primary">Shop Now</a>
                         </div>
                     </div>
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Buy One, Get One Free</h5>
                             <p class="card-text">For a limited time, buy one cake and get another one free. Don't miss out!</p>
-                            <a href="#" class="btn btn-primary">Shop Now</a>
+                            <a href="OrderPage.aspx" class="btn btn-primary">Shop Now</a>
                         </div>
                     </div>
                     <!-- Add more promotion cards as needed -->
@@ -68,7 +94,7 @@
                             <label for="txtEmail">Email</label>
                             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Placeholder="Enter your email address"></asp:TextBox>
                         </div>
-                        <asp:Button ID="btnSubscribe" runat="server" CssClass="btn btn-primary btn-block mt-3" Text="Subscribe" />
+                        <asp:Button ID="btnSubscribe" runat="server" CssClass="btn btn-secondary btn-block mt-3" Text="Subscribe" />
                     </asp:Panel>
                 </div>
             </div>
