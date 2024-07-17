@@ -14,13 +14,13 @@ namespace TheSweetSpot
         string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\TheSweetSpotDB.mdf;Integrated Security=True";
 
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
             {
-                if (!IsPostBack)
-                {
-                    ToggleAddressFields();
-                    LoadCakes();
-                }
+                ToggleAddressFields();
+                LoadCakes();
             }
+        }
 
         /// <summary>
         /// Quantity text box change event to calculate the total price based on the quantity entered
@@ -38,11 +38,18 @@ namespace TheSweetSpot
             int quantity;
 
             if (Session["CakePrice"] != null && decimal.TryParse(Session["CakePrice"].ToString(), out cakePrice) &&
-                int.TryParse(QuantityTB.Text, out quantity))
+                int.TryParse(QuantityTB.Text, out quantity ))
             {
                 decimal totalPrice = cakePrice * quantity;
                 TotalPriceLabel.Text = totalPrice.ToString("0.00");
             }
+
+            //if (Session["CakePrice"] != null && decimal.TryParse(Session["CakePrice"].ToString(), out cakePrice) &&
+            //   int.TryParse(txtCakeQuantity.Text, out quantity))
+            //{
+            //    decimal totalPrice = cakePrice * quantity;
+            //    TotalPriceLabel.Text = totalPrice.ToString("0.00");
+            //}
         }
 
         private void LoadCakes()
@@ -70,7 +77,10 @@ namespace TheSweetSpot
                 LoadCakeDetails(selectedCakeId);
             }
         }
-
+        /// <summary>
+        /// Method to load the cake details based on the selected cake
+        /// </summary>
+        /// <param name="cakeId"></param>
         private void LoadCakeDetails(int cakeId)
         {
             string query = "SELECT CakeName, CakePrice, CakeDescription FROM Cakes WHERE CakeID = @CakeID";
@@ -91,6 +101,80 @@ namespace TheSweetSpot
                     Session["CakePrice"] = Convert.ToDecimal(reader["CakePrice"]);
                 }
             }
+        }
+
+        // Method to save the order details to the database and pass the order details to the cart page
+        private void SaveOrderDetails()
+        {
+            try
+            {
+                // Get the user id from the session, default to NULL for non-registered users
+                int? userId = Session["UserID"] != null ? Convert.ToInt32(Session["UserID"]) : (int?)null;
+                int cakeId;
+                int.TryParse(ddlCakes.SelectedValue, out cakeId);
+                string cakeName = txtCakeName.Text;
+                decimal cakePrice;
+                decimal.TryParse(txtCakePrice.Text, out cakePrice);
+                int quantity;
+                int.TryParse(QuantityTB.Text, out quantity);
+                decimal totalPrice;
+                decimal.TryParse(TotalPriceLabel.Text, out totalPrice);
+                string flavour = txtFlavor.Text;
+                string topping = txtToppings.Text;
+                string cream = txtCream.Text;
+                string specialRequest = txtSpecialRequests.Text;
+                string deliveryMethod = ddlDeliveryMethod.SelectedValue;
+                string phoneNumber = txtPhone.Text;
+                DateTime deliveryDate;
+                DateTime.TryParse(txtDate.Text, out deliveryDate);
+                DateTime pickUpDate;
+                DateTime.TryParse(txtPickUpDate.Text, out pickUpDate);
+                string deliveryTime = txtDeliveryTime.Text;
+                string address = txtAddress.Text;
+                string city = txtCity.Text;
+                string postalCode = txtPostalCode.Text;
+                string username = txtUsername.Text;
+
+                // Save the order details to the database
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "INSERT INTO Orders (UserID, CakeID, CakeName, CakePrice, TotalAmount, Flavour, Toping, Cream, SpecialRequest, DeliveryMethod, PhoneNumber, DeliveryDate, PickUpDate, DeliveryTime, Address, City, PostalCode, Username) " +
+                        "VALUES (@UserID, @CakeID, @CakeName, @CakePrice, @TotalAmount, @Flavour, @Toping, @Cream, @SpecialRequest, @DeliveryMethod, @PhoneNumber, @DeliveryDate, @PickUpDate, @DeliveryTime, @Address, @City, @PostalCode, @Username)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@UserID", (object)userId ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CakeID", cakeId);
+                    cmd.Parameters.AddWithValue("@CakeName", cakeName);
+                    cmd.Parameters.AddWithValue("@CakePrice", cakePrice);
+                    cmd.Parameters.AddWithValue("@TotalAmount", totalPrice);
+                    cmd.Parameters.AddWithValue("@Flavour", flavour);
+                    cmd.Parameters.AddWithValue("@Toping", topping);
+                    cmd.Parameters.AddWithValue("@Cream", cream);
+                    cmd.Parameters.AddWithValue("@SpecialRequest", specialRequest);
+                    cmd.Parameters.AddWithValue("@DeliveryMethod", deliveryMethod);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
+                    cmd.Parameters.AddWithValue("@DeliveryDate", deliveryDate);
+                    cmd.Parameters.AddWithValue("@PickUpDate", pickUpDate);
+                    cmd.Parameters.AddWithValue("@DeliveryTime", deliveryTime);
+                    cmd.Parameters.AddWithValue("@Address", address);
+                    cmd.Parameters.AddWithValue("@City", city);
+                    cmd.Parameters.AddWithValue("@PostalCode", postalCode);
+                    cmd.Parameters.AddWithValue("@Username", username);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                // Display success message before redirecting to the cart page, gives the user 15 seconds to read the message
+                lblSuccess.Text = "Order placed successfully!";
+                System.Threading.Thread.Sleep(15000);
+
+                // Redirect to the cart page
+                Response.Redirect("CartPage.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "An error occurred: " + ex.Message;
+            }
+           
         }
 
 
@@ -114,6 +198,7 @@ namespace TheSweetSpot
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            SaveOrderDetails();
 
         }
     }

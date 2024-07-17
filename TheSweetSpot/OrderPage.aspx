@@ -122,6 +122,10 @@
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <!-- Message bundle -->
+                            <asp:Label ID="lblError" runat="server" Text="" CssClass="text-danger"></asp:Label>
+                            <asp:Label ID="lblSuccess" runat="server" Text="" CssClass="text-success"></asp:Label>
+
                             <label for="ddlDeliveryMethod">Delivery Method</label>
                             <asp:DropDownList ID="ddlDeliveryMethod" runat="server" CssClass="form-control mb-3" AutoPostBack="true" OnSelectedIndexChanged="ddlDeliveryMethod_SelectedIndexChanged">
                                 <asp:ListItem Text="Select Delivery Method" Value="" />
@@ -129,14 +133,27 @@
                                 <asp:ListItem Text="Delivery" Value="Delivery" />
                             </asp:DropDownList>
                         </div>
+
+                         <div class="form-group">
+                             <label for="txtUsername">User Name</label>
+                             <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" Placeholder="Enter your Name"></asp:TextBox>
+                         </div>
                         <div class="form-group">
                             <label for="txtPhone">Phone Number</label>
                             <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" Placeholder="Enter your phone number"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <label for="txtDate">Delivery Date</label>
-                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" Placeholder="Enter desired delivery date"></asp:TextBox>
+                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" TextMode="Date" Placeholder="Enter desired delivery date"></asp:TextBox>
                         </div>
+                         <div class="form-group">
+                         <label for="txtDeliveryTime">Delivery Time</label>
+                         <asp:TextBox ID="txtDeliveryTime" runat="server" CssClass="form-control" TextMode="Time" Placeholder="Enter desired time for delivery"></asp:TextBox>
+                     </div>
+                         <div class="form-group">
+                        <label for="txtPickUpDate">Pickup Time</label>
+                        <asp:TextBox ID="txtPickUpDate" runat="server" CssClass="form-control" TextMode="Time" Placeholder="Enter desired time for Pickup"></asp:TextBox>
+                    </div>
                     </div>
                 </div>
 
