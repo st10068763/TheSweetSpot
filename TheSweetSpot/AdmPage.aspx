@@ -129,6 +129,8 @@
                     <Columns>
                         <asp:BoundField DataField="OrderID" HeaderText="Order ID" />
                         <asp:BoundField DataField="UserID" HeaderText="User ID" />
+                        <asp:BoundField DataField="CakeID" HeaderText="CakeID" />
+                        <asp:BoundField DataField="CakeName" HeaderText="Cake Name" />
                         <asp:BoundField DataField="OrderDate" HeaderText="Order Date" />
                         <asp:BoundField DataField="TotalAmount" HeaderText="Total amount" />
                     </Columns>

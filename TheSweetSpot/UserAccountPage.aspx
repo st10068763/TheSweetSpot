@@ -12,6 +12,16 @@
     <link rel="stylesheet" href="~/MyCSS/MyStyleFencySheet.css" />
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-0r0g/X7sUvA/34QF4/lGmfFtNTPy7ZSdH8jKg2Ml4MQGye6TtVCd1Azs4M+HAdkY9+u6yXqyWw3/qyD27q/hCw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -54,14 +64,20 @@
 
             <!-- User Information Section -->
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <!-- Profile Picture -->
+                    <asp:Image ID="imgProfilepicture" runat="server"  CssClass="profile-pic" />
                     <div class="text-center mb-3">
-                        <asp:Image ID="imgProfilepicture" runat="server" CssClass="img-fluid rounded-circle" />
-                        <asp:FileUpload ID="fileProfilePicture" runat="server" style="display: none" accept="image/*" />
-                        
-                        <label for="fileProfilePicture" class="btn btn-outline-primary mt-2"><i class="fas fa-camera"></i> Upload Picture</label>
-                    </div>
+                        <asp:FileUpload ID="fileProfilePicture" runat="server" CssClass="form-control" style="display: none;" />
+                         <!-- Error message for the picture -->
+                         <asp:Label ID="PictureErrorMessage" Text="" runat="server" CssClass="text-danger"></asp:Label>
+                         <!-- Success message -->
+                         <asp:Label ID="SuccessMessage" Text="" runat="server" CssClass="text-success"></asp:Label>
+                        <label for="fileProfilePicture" class="btn btn-outline-primary mt-2" onclick="document.getElementById('<%= fileProfilePicture.ClientID %>').click();"><i class="fas fa-camera"></i> Upload Picture</label>
+                        <img id="ImagePreview" src="" alt="Profile Picture preview" style="max-width: 150px; height: auto; display: none;" />
+                        <asp:Button ID="btnUpdateProfile" runat="server" Text="Update Profile" CssClass="btn btn-primary" OnClick="btnUpdateProfile_Click" />
+                    </div>  
+                    
                 </div>
                 <div class="col-md-9">
                     <h3>User Information</h3>
@@ -71,114 +87,66 @@
                     </div>
                     <div class="form-group">
                         <label for="txtEmail">Email:</label>
-                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                     </div>
-                    <div class="form-group">
-                        <label for="txtFullName">Full Name:</label>
-                        <asp:TextBox ID="txtFullName" runat="server" CssClass="form-control"></asp:TextBox>
-                    </div>
-                    <asp:Button ID="btnUpdateProfile" runat="server" CssClass="btn btn-primary" Text="Update Profile" OnClick="btnUpdateProfile_Click" />
+                   
                 </div>
             </div>
+
             <hr />
 
-            <!-- Change Password Section -->
+            <!-- Password Change Section -->
             <div class="row">
                 <div class="col-md-6">
                     <h3>Change Password</h3>
                     <div class="form-group">
                         <label for="txtCurrentPassword">Current Password:</label>
-                        <asp:TextBox ID="txtCurrentPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox ID="txtCurrentPassword" runat="server" TextMode="Password" Enabled="false" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label for="txtNewPassword">New Password:</label>
-                        <asp:TextBox ID="txtNewPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label for="txtConfirmPassword">Confirm New Password:</label>
-                        <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <asp:Button ID="btnChangePassword" runat="server" CssClass="btn btn-primary" Text="Change Password" OnClick="btnChangePassword_Click" />
+                    <div class="form-group">
+                        <asp:Button ID="btnChangePassword" runat="server" Text="Change Password" CssClass="btn btn-warning" OnClick="btnChangePassword_Click" />
+                    </div>
                 </div>
             </div>
+
             <hr />
 
             <!-- Account Deactivation Section -->
             <div class="row">
-                <div class="col-md-6">
-                    <h3>Account Deactivation</h3>
-                    <p>If you wish to deactivate your account, click the button below.</p>
-                    <asp:Button ID="btnDeactivateAccount" runat="server" CssClass="btn btn-danger" Text="Deactivate Account" OnClick="btnDeactivateAccount_Click" />
-                </div>
-            </div>
-
-            <!-- Order History Section -->
-            <div class="row mt-5">
                 <div class="col-md-12">
-                    <h3>Order History</h3>
-                    <asp:Repeater ID="rptOrderHistory" runat="server">
-                        <HeaderTemplate>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Order Date</th>
-                                        <th>Total Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td><%# Eval("OrderID") %></td>
-                                <td><%# Eval("OrderDate", "{0:MM/dd/yyyy}") %></td>
-                                <td><%# Eval("TotalAmount", "{0:C}") %></td>
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                                </tbody>
-                            </table>
-                        </FooterTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-
-            <!-- Saved Custom Cake Designs Section -->
-            <div class="row mt-5">
-                <div class="col-md-12">
-                    <h3>Saved Custom Cake Designs</h3>
-                    <asp:Repeater ID="rptSavedDesigns" runat="server">
-                        <HeaderTemplate>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Design ID</th>
-                                        <th>Design Name</th>
-                                        <th>Last Modified</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td><%# Eval("DesignID") %></td>
-                                <td><%# Eval("DesignName") %></td>
-                                <td><%# Eval("LastModified", "{0:MM/dd/yyyy}") %></td>
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                                </tbody>
-                            </table>
-                        </FooterTemplate>
-                    </asp:Repeater>
+                    <h3>Deactivate Account</h3>
+                    <p>If you deactivate your account, you will no longer be able to log in or place orders.</p>
+                    <asp:Button ID="btnDeactivateAccount" runat="server" Text="Deactivate Account" CssClass="btn btn-danger" OnClick="btnDeactivateAccount_Click" />
                 </div>
             </div>
         </div>
     </form>
 
-    <!-- Bootstrap JS and any additional scripts -->
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS for file input -->
+    <script>
+        document.getElementById('<%= fileProfilePicture.ClientID %>').addEventListener('change', function (event) {
+            var fileInput = event.target;
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('ImagePreview').src = e.target.result;
+                document.getElementById('ImagePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
 </body>
 </html>

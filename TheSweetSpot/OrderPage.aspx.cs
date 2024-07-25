@@ -101,7 +101,7 @@ namespace TheSweetSpot
                     Session["CakePrice"] = Convert.ToDecimal(reader["CakePrice"]);
                 }
             }
-        }
+        }  
 
         // Method to save the order details to the database and pass the order details to the cart page
         private void SaveOrderDetails()
@@ -167,7 +167,31 @@ namespace TheSweetSpot
                 lblSuccess.Text = "Order placed successfully!";
                 System.Threading.Thread.Sleep(15000);
 
-                // Redirect to the cart page
+                var cart = Session["Cart"] as List<OrderItem> ?? new List<OrderItem>();
+                cart.Add(new OrderItem
+                {
+                    CakeID = cakeId,
+                    CakeName = cakeName,
+                    CakePrice = cakePrice,
+                    Quantity = quantity,
+                    TotalPrice = totalPrice,
+                    Flavour = flavour,
+                    Topping = topping,
+                    Cream = cream,
+                    SpecialRequest = specialRequest,
+                    DeliveryMethod = deliveryMethod,
+                    PhoneNumber = phoneNumber,
+                    DeliveryDate = deliveryDate,
+                    PickUpDate = pickUpDate,
+                    DeliveryTime = deliveryTime,
+                    Address = address,
+                    City = city,
+                    PostalCode = postalCode,
+                    Username = username
+                });
+                Session["Cart"] = cart;
+
+                lblSuccess.Text = "Order placed successfully!";
                 Response.Redirect("CartPage.aspx");
             }
             catch (Exception ex)
@@ -176,7 +200,6 @@ namespace TheSweetSpot
             }
            
         }
-
 
         protected void ddlDeliveryMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -200,6 +223,29 @@ namespace TheSweetSpot
         {
             SaveOrderDetails();
 
+        }
+
+        [Serializable]
+        public class OrderItem
+        {
+            public int CakeID { get; set; }
+            public string CakeName { get; set; }
+            public decimal CakePrice { get; set; }
+            public int Quantity { get; set; }
+            public decimal TotalPrice { get; set; }
+            public string Flavour { get; set; }
+            public string Topping { get; set; }
+            public string Cream { get; set; }
+            public string SpecialRequest { get; set; }
+            public string DeliveryMethod { get; set; }
+            public string PhoneNumber { get; set; }
+            public DateTime DeliveryDate { get; set; }
+            public DateTime PickUpDate { get; set; }
+            public string DeliveryTime { get; set; }
+            public string Address { get; set; }
+            public string City { get; set; }
+            public string PostalCode { get; set; }
+            public string Username { get; set; }
         }
     }
 }

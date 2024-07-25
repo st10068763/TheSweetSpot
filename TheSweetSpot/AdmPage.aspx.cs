@@ -17,8 +17,8 @@ namespace TheSweetSpot
             if (!IsPostBack)
             {
                 LoadCakes();
-                //LoadOrders();
-                //LoadUsers();
+                LoadOrders();
+                LoadUsers();
             }
         }
 
@@ -112,34 +112,60 @@ namespace TheSweetSpot
             }
         }
 
-        protected void btnRemoveUser_Click(object sender, EventArgs e)
+        // Method to delete an user from the database
+        private void RemoveUser(int userID)
         {
-            //Button btn = (Button)sender;
-            //int userID = int.Parse(btn.CommandArgument);
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Users WHERE UserID = @UserID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", userID);
 
-            //string connStr = ConfigurationManager.ConnectionStrings["TheSweetSpotDB"].ConnectionString;
-            //using (SqlConnection conn = new SqlConnection(connStr))
-            //{
-            //    string query = "DELETE FROM Users WHERE UserID = @UserID";
-            //    using (SqlCommand cmd = new SqlCommand(query, conn))
-            //    {
-            //        cmd.Parameters.AddWithValue("@UserID", userID);
-
-            //        try
-            //        {
-            //            conn.Open();
-            //            cmd.ExecuteNonQuery();
-            //            successMessage.Text = "User removed successfully!";
-            //            LoadUsers(); // Refresh the user list
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            errorMessage.Text = "Error removing user: " + ex.Message;
-            //        }
-            //    }
-            //}
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        successMessage.Text = "User removed successfully!";
+                        // Refresh the user list
+                        LoadUsers();
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMessage.Text = "Error removing user: " + ex.Message;
+                    }
+                }
+            }
         }
 
+        // Method to load all the users from the database
+        private void LoadUsers()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT UserID, Username, Email FROM Users";
+                using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    gvUsers.DataSource = dt;
+                    gvUsers.DataBind();
+                }
+            }
+        }
+
+        protected void btnRemoveUser_Click(object sender, EventArgs e)
+        {
+            // calls the method to remove the user
+            Button btn = (Button)sender;
+            // gets the user id from the button
+            int userID = int.Parse(btn.CommandArgument);
+            RemoveUser(userID);
+        }
+
+        /// <summary>
+        /// Method to load all the cakes from the database
+        /// </summary>
         private void LoadCakes()
         {
            
@@ -156,36 +182,20 @@ namespace TheSweetSpot
             }
         }
 
-        //private void LoadOrders()
-        //{
-        //    string connStr = ConfigurationManager.ConnectionStrings["TheSweetSpotDB"].ConnectionString;
-        //    using (SqlConnection conn = new SqlConnection(connStr))
-        //    {
-        //        string query = "SELECT OrderID, UserID, OrderDate, TotalAmount FROM Orders";
-        //        using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-        //        {
-        //            DataTable dt = new DataTable();
-        //            da.Fill(dt);
-        //            gvOrders.DataSource = dt;
-        //            gvOrders.DataBind();
-        //        }
-        //    }
-        //}
-
-        //private void LoadUsers()
-        //{
-        //    string connStr = ConfigurationManager.ConnectionStrings["TheSweetSpotDB"].ConnectionString;
-        //    using (SqlConnection conn = new SqlConnection(connStr))
-        //    {
-        //        string query = "SELECT UserID, Username, Email FROM Users";
-        //        using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-        //        {
-        //            DataTable dt = new DataTable();
-        //            da.Fill(dt);
-        //            gvUsers.DataSource = dt;
-        //            gvUsers.DataBind();
-        //        }
-        //    }
-        //}
+        // Method to load all the orders from the database
+        private void LoadOrders()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT OrderID, UserID, CakeID, CakeName, OrderDate, TotalAmount FROM Orders";
+                using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    gvOrders.DataSource = dt;
+                    gvOrders.DataBind();
+                }
+            }
+        }
     }
 }

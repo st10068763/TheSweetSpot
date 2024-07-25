@@ -1,18 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CartPage.aspx.cs" Inherits="TheSweetSpot.CartPage" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Shopping Cart</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-     <!-- Custom CSS -->
-    <link rel="stylesheet" href="~/MyCSS/MyStyleFencySheet.css" />
-    <style>
-        /* Custom styles can be added here */
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -47,25 +41,28 @@
             <h1>Your Shopping Cart</h1>
             <div class="row mt-4">
                 <div class="col-md-8">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <!-- Example item in cart -->
-                            <h5 class="card-title">Product Name</h5>
-                            <p class="card-text">Price: R50</p>
-                            <p class="card-text">Quantity: 2</p>
-                            <asp:Button ID="btnRemove" runat="server" Text="Remove" CssClass="btn-outline-danger" OnClick="btnRemove_Click" />
-                            
-                        </div>
-                    </div>
-                    <!-- Repeat for each item in cart -->
+                    <asp:Repeater ID="CartRepeater" runat="server">
+                        <ItemTemplate>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%# Eval("CakeName") %></h5>
+                                    <p class="card-text">Price: R<%# Eval("CakePrice") %></p>
+                                    <p class="card-text">Quantity: <%# Eval("Quantity") %></p>
+                                    <p class="card-text">Address: <%# Eval("Address") %></p>
+                                    <p class="card-text">Delivery Time: <%# Eval("DeliveryTime") %></p>
+                                    <asp:Button ID="btnRemove" runat="server" Text="Remove" CssClass="btn btn-outline-danger" CommandName="Remove" CommandArgument='<%# Eval("CakeID") %>' OnClick="btnRemove_Click" />
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Order Summary</h5>
-                            <p class="card-text">Total Items: 3</p>
-                            <p class="card-text">Total Price: R150</p>
-                           <asp:Button ID="btnCheckout" runat="server" Text="Checkout" CssClass="btn-outline-primary" OnClick="btnCheckout_Click" />
+                            <p class="card-text">Total Items: <asp:Label ID="TotalItemsLabel" runat="server" /></p>
+                            <p class="card-text">Total Price: R<asp:Label ID="TotalPriceLabel" runat="server" /></p>
+                            <asp:Button ID="btnCheckout" runat="server" Text="Checkout" CssClass="btn btn-outline-primary" OnClick="btnCheckout_Click" />
                         </div>
                     </div>
                 </div>
